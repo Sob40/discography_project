@@ -26,5 +26,10 @@ module DiscographyProject
 
     # Add additional eager load paths if necessary
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # ❌ Disable MiniTest (Prevents Rails from generating test files)
+    config.generators do |g|
+      g.test_framework nil
+    end
   end
 end
