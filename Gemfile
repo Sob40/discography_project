@@ -40,6 +40,12 @@ group :development, :test do
 
   # Ruby style guide for Rails projects
   gem "rubocop-rails-omakase", require: false
+
+  # RSpec for testing
+  gem "rspec-rails", "~> 7.1"
+
+  # Environment variable management
+  gem "dotenv-rails"
 end
 
 group :development do
@@ -51,9 +57,4 @@ group :test do
   # System testing (UI)
   gem "capybara"
   gem "selenium-webdriver"
-end
-
-group :development, :test do
-  # Environment variable management
-  gem "dotenv-rails"
 end
