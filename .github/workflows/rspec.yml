@@ -12,6 +12,12 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    env:
+      DATABASE_NAME: discography_test
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: postgres
+      SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -26,7 +32,13 @@ jobs:
         run: bundle install
 
       - name: Set up database
-        run: bin/rails db:migrate RAILS_ENV=test
+        run: |
+          bin/rails db:create RAILS_ENV=test
+          bin/rails db:migrate RAILS_ENV=test
+          bin/rails db:test:prepare
+
+      - name: Print RAILS_ENV
+        run: echo "RAILS_ENV=$RAILS_ENV"
 
       - name: Run tests
         run: bundle exec rspec
