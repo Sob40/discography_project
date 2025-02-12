@@ -18,7 +18,7 @@ RSpec.describe 'Artist Management', type: :system do
     click_on 'New Artist'
     fill_in 'Name', with: 'Queen'
     fill_in 'Description', with: 'Rock band'
-    click_on 'Create Artist'
+    click_on 'Create'  # Se busca el botón con el texto "Create" según la vista
 
     expect(page).to have_content('Queen')
   end
@@ -27,7 +27,7 @@ RSpec.describe 'Artist Management', type: :system do
     visit artist_path(artist)
     click_on 'Edit Artist'
     fill_in 'Name', with: 'The Rolling Stones'
-    click_on 'Update Artist'
+    click_on 'Update'  # Se busca el botón con el texto "Update" según la vista
 
     expect(page).to have_content('The Rolling Stones')
   end
