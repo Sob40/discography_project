@@ -17,6 +17,7 @@ jobs:
       DATABASE_USER: postgres
       DATABASE_PASSWORD: postgres
       SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
+      SELENIUM_DRIVER: chrome_headless  # 🚀 Configura Capybara para usar Chrome
 
     steps:
       - name: Checkout code
@@ -27,6 +28,11 @@ jobs:
         with:
           ruby-version: 3.2
           bundler-cache: true
+
+      - name: Install Chrome & ChromeDriver
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y chromium-chromedriver
 
       - name: Install dependencies
         run: bundle install
@@ -45,4 +51,3 @@ jobs:
 
       - name: Run tests
         run: bundle exec rspec
-        
