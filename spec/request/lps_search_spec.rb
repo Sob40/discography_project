@@ -39,8 +39,8 @@ RSpec.describe 'LPs Filtering', type: :request do
       end
     end
 
-    context 'con parámetro de búsqueda con acentos' do
-      it 'filtra LPs ignorando los acentos en el nombre del artista' do
+    context 'with search parameter containing accents' do
+      it 'filters LPs ignoring accents in the artist name' do
         get lps_path, params: { artist: 'gráce' }
         body = CGI.unescapeHTML(response.body)
         aggregate_failures do
