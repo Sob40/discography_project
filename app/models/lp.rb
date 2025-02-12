@@ -8,7 +8,8 @@ class Lp < ApplicationRecord
   validates :description, presence: true
 
   scope :by_artist_name, lambda { |artist_name|
-    joins(:artist).where('LOWER(artists.name) LIKE ?', "%#{artist_name.downcase}%")
+    normalized_artist_name = I18n.transliterate(artist_name).downcase
+    joins(:artist).where('LOWER(artists.normalized_name) LIKE ?', "%#{normalized_artist_name}%")
   }
   scope :ordered, -> { order(:name) }
 end

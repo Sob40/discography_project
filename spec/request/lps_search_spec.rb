@@ -38,5 +38,16 @@ RSpec.describe 'LPs Filtering', type: :request do
         expect(response.body).to include('No LPs found')
       end
     end
+
+    context 'with search parameter containing accents' do
+      it 'filters LPs ignoring accents in the artist name' do
+        get lps_path, params: { artist: 'gráce' }
+        body = CGI.unescapeHTML(response.body)
+        aggregate_failures do
+          expect(body).to include('Grace Album')
+          expect(body).not_to include('Guns Album')
+        end
+      end
+    end
   end
 end
