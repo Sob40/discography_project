@@ -48,6 +48,8 @@ group :development, :test do
   gem 'rubocop-rspec_rails', require: false
 
   # RSpec for testing
+  gem 'factory_bot_rails'
+  gem 'faker'
   gem 'rspec-rails', '~> 7.1'
 
   # Environment variable management
@@ -63,4 +65,5 @@ group :test do
   # System testing (UI)
   gem 'capybara'
   gem 'selenium-webdriver'
+  gem 'shoulda-matchers', '~> 6.4' # For easy model validations ;)
 end

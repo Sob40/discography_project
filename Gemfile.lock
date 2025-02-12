@@ -107,6 +107,13 @@ GEM
       railties (>= 6.1)
     drb (2.2.1)
     erubi (1.13.1)
+    factory_bot (6.5.1)
+      activesupport (>= 6.1.0)
+    factory_bot_rails (6.4.4)
+      factory_bot (~> 6.5)
+      railties (>= 5.0.0)
+    faker (3.5.1)
+      i18n (>= 1.8.11, < 2)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.7)
@@ -279,6 +286,8 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    shoulda-matchers (6.4.0)
+      activesupport (>= 5.2.0)
     solid_cache (1.0.7)
       activejob (>= 7.2)
       activerecord (>= 7.2)
@@ -338,6 +347,8 @@ DEPENDENCIES
   capybara
   debug
   dotenv-rails
+  factory_bot_rails
+  faker
   importmap-rails
   jbuilder
   propshaft
@@ -350,6 +361,7 @@ DEPENDENCIES
   rubocop-rspec
   rubocop-rspec_rails
   selenium-webdriver
+  shoulda-matchers (~> 6.4)
   solid_cache
   sqlite3 (>= 2.1)
   stimulus-rails

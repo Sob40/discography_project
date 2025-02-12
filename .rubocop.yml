@@ -7,3 +7,10 @@ require:
 AllCops:
   NewCops: enable
   SuggestExtensions: false
+
+RSpec/ImplicitExpect:
+  EnforcedStyle: should
+
+Style/Documentation:
+  Enabled: false
+  
