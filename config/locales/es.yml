@@ -1,0 +1,6 @@
+es:
+  notices:
+    artist_created: El artista se ha creado correctamente.
+    artist_updated: El artista se ha actualizado correctamente.
+    artist_destroyed: El artista se ha destruido correctamente.
+    
