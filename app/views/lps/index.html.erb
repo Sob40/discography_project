@@ -1,2 +1,44 @@
-<h1>Lps#index</h1>
-<p>Find me in app/views/lps/index.html.erb</p>
+<div class="container mt-4">
+  <!-- Header with title and New LP button -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>LPs</h1>
+    <%= link_to 'New LP', new_lp_path, class: 'btn btn-success' %>
+  </div>
+
+  <!-- Search form: filter by artist name -->
+<div class="container my-4">
+  <%= form_with url: lps_path, method: :get, local: true, class: "input-group" do |f| %>
+    <%= f.text_field :artist, placeholder: "Search LPs by artist name...", class: "form-control" %>
+    <button type="submit" class="btn btn-primary">
+      <i class="bi bi-search"></i> Search
+    </button>
+  <% end %>
+</div>
+
+  <% if @lps.any? %>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <% @lps.each do |lp| %>
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title"><%= lp.name %></h5>
+              <p class="card-text"><%= truncate(lp.description, length: 100) %></p>
+              <% if lp.artist.present? %>
+                <p class="card-text">
+                  <small class="text-muted">Artist: <%= lp.artist.name %></small>
+                </p>
+              <% end %>
+            </div>
+            <div class="card-footer text-end">
+              <%= link_to 'View LP', lp_path(lp), class: 'btn btn-primary btn-sm' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="alert alert-info" role="alert">
+      No LPs found.
+    </div>
+  <% end %>
+</div>
