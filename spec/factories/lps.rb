@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :lp do
-    name { Faker::Music.album }
+    sequence(:name) { |n| "#{Faker::Music.album} #{n}" }
     description { Faker::Lorem.paragraph }
     artist
   end
