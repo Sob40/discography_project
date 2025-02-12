@@ -1,2 +1,35 @@
-<h1>Artists#index</h1>
-<p>Find me in app/views/artists/index.html.erb</p>
+<div class="container mt-4">
+  <h1 class="mb-4">Artists</h1>
+
+  <!-- Search form -->
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <%= form_with url: artists_path, method: :get, local: true, class: "input-group" do |f| %>
+        <%= f.text_field :search, placeholder: "Search artists...", class: "form-control" %>
+        <button type="submit" class="btn btn-outline-secondary">Search</button>
+      <% end %>
+    </div>
+  </div>
+
+  <% if @artists.any? %>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <% @artists.each do |artist| %>
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title"><%= artist.name %></h5>
+              <p class="card-text"><%= truncate(artist.description, length: 100) %></p>
+            </div>
+            <div class="card-footer text-end">
+              <%= link_to 'View Details', artist_path(artist), class: 'btn btn-primary btn-sm' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="alert alert-info" role="alert">
+      No artists found.
+    </div>
+  <% end %>
+</div>
