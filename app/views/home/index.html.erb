@@ -1,4 +1,14 @@
 <div class="container">
-  <h1 class="mt-5">Discography Project</h1>
-  <p class="lead">Manage your musical records efficiently with Ruby on Rails.</p>
+  <div class="p-5 mb-4 bg-light rounded-3 text-center">
+    <div class="container-fluid py-5">
+      <h1 class="display-4 fw-bold">Discography Project</h1>
+      <p class="fs-5">Discover, manage, and share your favorite musical records with ease.</p>
+      <hr class="my-4">
+      <p>Explore our curated database of artists, LPs, and songs. Easily manage records and generate comprehensive reports to keep track of your musical collection.</p>
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <%= link_to "Explore Artists", artists_path, class: "btn btn-primary btn-lg px-4 me-sm-3" %>
+        <%= link_to "View Reports", reports_path, class: "btn btn-secondary btn-lg px-4" %>
+      </div>
+    </div>
+  </div>
 </div>
