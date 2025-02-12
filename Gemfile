@@ -66,6 +66,7 @@ group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 6.4' # For easy model validations ;)
+  gem 'webdrivers'
 end
 
 gem 'cssbundling-rails', '~> 1.4'
