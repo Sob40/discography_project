@@ -1,19 +1,19 @@
 <div class="container mt-4">
-  <!-- Header with title and New LP button -->
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h1>LPs</h1>
     <%= link_to 'New LP', new_lp_path, class: 'btn btn-success' %>
   </div>
 
-  <!-- Search form: filter by artist name -->
-<div class="container my-4">
-  <%= form_with url: lps_path, method: :get, local: true, class: "input-group" do |f| %>
-    <%= f.text_field :artist, placeholder: "Search LPs by artist name...", class: "form-control" %>
-    <button type="submit" class="btn btn-primary">
-      <i class="bi bi-search"></i> Search
-    </button>
-  <% end %>
-</div>
+  <div class="row mb-4">
+    <div class="col-md-12">
+    <%= form_with url: lps_path, method: :get, local: true, class: "input-group" do |f| %>
+      <%= f.text_field :artist, placeholder: "Search LPs by artist name...", class: "form-control" %>
+      <button type="submit" class="btn btn-primary">
+        <i class="bi bi-search"></i> Search
+      </button>
+    <% end %>
+    </div>
+  </div>
 
   <% if @lps.any? %>
     <div class="row row-cols-1 row-cols-md-3 g-4">
