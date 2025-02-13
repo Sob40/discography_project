@@ -10,7 +10,9 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    # Puedes elegir el runner que necesites; si usas macOS localmente, prueba con "macos-latest"
+    # runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     env:
       DATABASE_NAME: discography_test
@@ -18,6 +20,7 @@ jobs:
       DATABASE_PASSWORD: postgres
       SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
       SELENIUM_DRIVER: chrome_headless  # 🚀 Configura Capybara para usar Chrome
+      GOOGLE_CHROME_BIN: /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome
 
     steps:
       - name: Checkout code
@@ -31,8 +34,12 @@ jobs:
 
       - name: Install Chrome & ChromeDriver
         run: |
-          sudo apt-get update
-          sudo apt-get install -y chromium-chromedriver
+          brew update
+          brew install --cask google-chrome
+          brew install --cask chromedriver
+
+      - name: Remove quarantine attribute from ChromeDriver
+        run: sudo xattr -r -d com.apple.quarantine "$(which chromedriver)"
 
       - name: Install dependencies
         run: bundle install
@@ -51,3 +58,4 @@ jobs:
 
       - name: Run tests
         run: bundle exec rspec
+        

@@ -373,7 +373,7 @@ DEPENDENCIES
   rubocop-rails
   rubocop-rspec
   rubocop-rspec_rails
-  selenium-webdriver
+  selenium-webdriver (>= 4.11.0)
   shoulda-matchers (~> 6.4)
   solid_cache
   sqlite3 (>= 2.1)
