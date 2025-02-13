@@ -3,7 +3,6 @@
 class ArtistsController < ApplicationController
   before_action :set_artist, only: %i[show edit update destroy]
 
-  # GET /artists
   def index
     @artists = if params[:search].present?
                  Artist.by_name(params[:search]).ordered
@@ -12,20 +11,16 @@ class ArtistsController < ApplicationController
                end
   end
 
-  # GET /artists/:id
   def show
     @lps = @artist.lps
   end
 
-  # GET /artists/new
   def new
     @artist = Artist.new
   end
 
-  # GET /artists/:id/edit
   def edit; end
 
-  # POST /artists
   def create
     @artist = Artist.new(artist_params)
     if @artist.save
@@ -35,7 +30,6 @@ class ArtistsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /artists/:id
   def update
     if @artist.update(artist_params)
       redirect_to @artist, notice: t('notices.artist_updated')
@@ -44,7 +38,6 @@ class ArtistsController < ApplicationController
     end
   end
 
-  # DELETE /artists/:id
   def destroy
     @artist.destroy
     redirect_to artists_url, notice: t('notices.artist_destroyed')
