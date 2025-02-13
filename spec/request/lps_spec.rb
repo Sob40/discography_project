@@ -18,10 +18,11 @@ RSpec.describe 'LPs', type: :request do
     end
 
     context 'with search parameter' do
-      let(:artist2) { create(:artist, name: 'Queen', description: 'Rock band') }
+      let(:queen_artist) { create(:artist, name: 'Queen', description: 'Rock band') }
 
-      # Línea en blanco añadida después del último let
-      before { create(:lp, name: 'A Night at the Opera', description: 'Great album', artist: artist2) }
+      before do
+        create(:lp, name: 'A Night at the Opera', description: 'Great album', artist: queen_artist)
+      end
 
       it 'filters LPs by artist name ignoring case and accents' do
         get lps_path, params: { artist: 'queen' }
@@ -42,24 +43,69 @@ RSpec.describe 'LPs', type: :request do
   end
 
   describe 'GET /lps/:id' do
-    it 'renders the LP show page' do
-      get lp_path(lp)
-      expect(response).to have_http_status(:ok)
-      expect(response.body).to include('Abbey Road')
-      expect(response.body).to include('The Beatles')
+    context 'with songs' do
+      before do
+        create(:song, name: 'Come Together', lp: lp)
+        create(:song, name: 'Something', lp: lp)
+      end
+
+      it 'renders the LP show page with songs listed' do
+        get lp_path(lp)
+        expect(response).to have_http_status(:ok)
+        body = CGI.unescapeHTML(response.body)
+        aggregate_failures do
+          expect(body).to include('Come Together')
+          expect(body).to include('Something')
+        end
+      end
+    end
+
+    context 'without songs' do
+      it 'renders the LP show page without songs' do
+        get lp_path(lp)
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to include('Abbey Road')
+      end
     end
   end
 
   describe 'POST /lps' do
-    it 'creates a new LP' do
-      expect do
-        post lps_path, params: { lp: { name: 'Let It Be', description: 'Final album', artist_id: artist.id } }
-      end.to change(Lp, :count).by(1)
+    context 'without nested songs' do
+      it 'creates a new LP' do
+        lp_params = {
+          name: 'Let It Be',
+          description: 'Final album',
+          artist_id: artist.id
+        }
+        expect do
+          post lps_path, params: { lp: lp_params }
+        end.to change(Lp, :count).by(1)
 
-      new_lp = Lp.find_by(name: 'Let It Be')
-      expect(response).to redirect_to(lp_path(new_lp))
-      follow_redirect!
-      expect(response.body).to include('Let It Be')
+        new_lp = Lp.find_by(name: 'Let It Be')
+        expect(response).to redirect_to(lp_path(new_lp))
+        follow_redirect!
+        expect(response.body).to include('Let It Be')
+      end
+    end
+
+    context 'with nested songs' do
+      it 'creates a new LP with songs' do
+        lp_params = {
+          name: 'Let It Be',
+          description: 'Final album',
+          artist_id: artist.id,
+          songs_attributes: {
+            '0' => { name: 'Across the Universe' },
+            '1' => { name: 'Let It Be Song' }
+          }
+        }
+        expect do
+          post lps_path, params: { lp: lp_params }
+        end.to change(Lp, :count).by(1)
+
+        new_lp = Lp.find_by(name: 'Let It Be')
+        expect(new_lp.songs.count).to eq(2)
+      end
     end
   end
 
