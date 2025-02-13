@@ -18,23 +18,23 @@ RSpec.describe 'Artist Management', type: :system do
     click_on 'New Artist'
     fill_in 'Name', with: 'Queen'
     fill_in 'Description', with: 'Rock band'
-    click_on 'Create'  # Se busca el botón con el texto "Create" según la vista
+    click_on 'Create'
 
     expect(page).to have_content('Queen')
   end
 
   it 'allows editing an artist' do
     visit artist_path(artist)
-    click_on 'Edit Artist'
+    click_on 'Edit'
     fill_in 'Name', with: 'The Rolling Stones'
-    click_on 'Update'  # Se busca el botón con el texto "Update" según la vista
+    click_on 'Update'
 
     expect(page).to have_content('The Rolling Stones')
   end
 
   it 'allows deleting an artist' do
     visit artist_path(artist)
-    click_on 'Delete Artist'
+    click_on 'Delete'
 
     expect(page).to have_content('Artists')
     expect(page).to have_no_content('The Beatles')
