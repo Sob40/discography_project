@@ -25,4 +25,14 @@ RSpec/MultipleExpectations:
 
 Rails/StrongParametersExpect:
   Enabled: false
+
+Metrics/MethodLength:
+  Max: 14
+  Exclude:
+    - 'spec/**/*'
+
+RSpec/MultipleExpectations:
+  Max: 6
+  Exclude:
+    - 'spec/**/*'  
   
