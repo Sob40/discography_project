@@ -5,11 +5,24 @@
     <p><strong>Artist:</strong> <%= @lp.artist.name %></p>
   <% end %>
 
-  <div class="mt-4">
-    <%= link_to 'Edit LP', edit_lp_path(@lp), class: 'btn btn-warning' %>
-    <%= link_to 'Back to LPs', lps_path, class: 'btn btn-secondary' %>
-    <%= link_to 'Delete LP', @lp, 
-      data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, 
-      class: 'btn btn-danger' %>
+  <% if @lp.songs.any? %>
+    <h3>Songs</h3>
+    <ul class="list-group mb-4">
+      <% @lp.songs.each do |song| %>
+        <li class="list-group-item">
+          <%= song.name %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <div class="alert alert-info" role="alert">
+      No songs available for this LP.
+    </div>
+  <% end %>
+
+  <div class="mt-4 d-flex justify-content-end">
+    <%= link_to 'Edit', edit_lp_path(@lp), class: 'btn btn-warning me-2' %>
+    <%= link_to 'Back', lps_path, class: 'btn btn-secondary me-2' %>
+    <%= link_to 'Delete', @lp, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
   </div>
 </div>

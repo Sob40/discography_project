@@ -4,6 +4,8 @@ class Lp < ApplicationRecord
   belongs_to :artist
   has_many :songs, dependent: :destroy
 
+  accepts_nested_attributes_for :songs, allow_destroy: true, reject_if: :all_blank
+
   validates :name, presence: true, uniqueness: { case_sensitive: false }
   validates :description, presence: true
 

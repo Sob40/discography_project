@@ -7,8 +7,8 @@
     <%= f.label :description, "Description", class: "form-label" %>
     <%= f.text_area :description, rows: 3, class: "form-control" %>
   </div>
-  <div>
-    <%= f.submit (@artist.persisted? ? "Update" : "Create"), class: "btn btn-primary" %>
+  <div class="d-flex justify-content-end">
+    <%= f.submit (@artist.persisted? ? "Update" : "Create"), class: "btn btn-primary me-2" %>
     <%= link_to 'Back', artists_path, class: "btn btn-secondary" %>
   </div>
 <% end %>

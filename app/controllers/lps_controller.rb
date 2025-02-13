@@ -48,6 +48,6 @@ class LpsController < ApplicationController
   end
 
   def lp_params
-    params.expect(lp: %i[name description artist_id])
+    params.require(:lp).permit(:name, :description, :artist_id, songs_attributes: %I[id name _destroy])
   end
 end

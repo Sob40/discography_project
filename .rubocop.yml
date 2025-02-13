@@ -18,8 +18,21 @@ RSpec/MultipleExpectations:
   Max: 2
 
 RSpec/ExampleLength:
-  Max: 10
+  Max: 15
 
 RSpec/MultipleExpectations:
-  Max: 3    
+  Max: 3
+
+Rails/StrongParametersExpect:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 14
+  Exclude:
+    - 'spec/**/*'
+
+RSpec/MultipleExpectations:
+  Max: 6
+  Exclude:
+    - 'spec/**/*'  
   
