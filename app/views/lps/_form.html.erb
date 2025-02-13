@@ -1,17 +1,67 @@
-<%= form_with(model: lp, local: true, class: 'needs-validation', novalidate: true) do |form| %>
-  <div class='mb-3'>
-    <%= form.label :name, 'Name *', class: 'form-label' %>
-    <%= form.text_field :name, class: 'form-control', required: true %>
+<%= form_with(model: lp, local: true, class: "needs-validation", novalidate: true) do |form| %>
+  <div class="mb-3">
+    <%= form.label :name, "LP Name *", class: "form-label" %>
+    <%= form.text_field :name, class: "form-control", required: true %>
   </div>
-  <div class='mb-3'>
-    <%= form.label :description, 'Description', class: 'form-label' %>
-    <%= form.text_area :description, rows: 3, class: 'form-control' %>
+  <div class="mb-3">
+    <%= form.label :description, "Description", class: "form-label" %>
+    <%= form.text_area :description, rows: 3, class: "form-control" %>
   </div>
-  <div class='mb-3'>
-    <%= form.label :artist_id, 'Artist', class: 'form-label' %>
-    <%= form.collection_select :artist_id, Artist.all, :id, :name, { prompt: 'Select an artist' }, { class: 'form-select' } %>
+  <div class="mb-3">
+    <%= form.label :artist_id, "Artist", class: "form-label" %>
+    <%= form.collection_select :artist_id, Artist.all, :id, :name, { prompt: "Select an artist" }, { class: "form-select" } %>
   </div>
-  <div>
-    <%= form.submit (lp.persisted? ? 'Update' : 'Create'), class: 'btn btn-primary' %>
+
+  <hr>
+  <h4>Songs</h4>
+  <div data-controller="nested-fields">
+    <div data-nested-fields-target="container">
+      <%= form.fields_for :songs do |song_form| %>
+        <div class="nested-field mb-3">
+          <div class="row align-items-center">
+            <div class="col">
+              <div class="input-group">
+                <span class="input-group-text">Song Name</span>
+                <%= song_form.text_field :name, class: "form-control", placeholder: "Enter song name" %>
+              </div>
+            </div>
+            <div class="col-auto">
+              <button data-action="click->nested-fields#remove" type="button" class="btn btn-danger btn-sm">
+                Remove
+              </button>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <template data-nested-fields-target="template">
+      <div class="nested-field mb-3">
+        <div class="row align-items-center">
+          <div class="col">
+            <div class="input-group">
+              <span class="input-group-text">Song Name</span>
+              <input type="text" name="lp[songs_attributes][NEW_RECORD][name]" class="form-control" placeholder="Enter song name" />
+            </div>
+          </div>
+          <div class="col-auto">
+            <button data-action="click->nested-fields#remove" type="button" class="btn btn-danger btn-sm">
+              Remove
+            </button>
+          </div>
+        </div>
+      </div>
+    </template>
+
+    <div class="mb-3">
+      <button data-action="click->nested-fields#add" type="button" class="btn btn-secondary">
+        Add Song
+      </button>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end gap-2 mt-4">
+    <%= link_to 'Back', lps_path, class: "btn btn-secondary" %>
+    <%= form.submit (lp.persisted? ? "Update" : "Create"), class: "btn btn-primary" %>
   </div>
 <% end %>
