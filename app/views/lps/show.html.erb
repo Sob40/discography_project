@@ -1,2 +1,15 @@
-<h1>Lps#show</h1>
-<p>Find me in app/views/lps/show.html.erb</p>
+<div class="container mt-4">
+  <h1 class="mb-4"><%= @lp.name %></h1>
+  <p><%= @lp.description %></p>
+  <% if @lp.artist.present? %>
+    <p><strong>Artist:</strong> <%= @lp.artist.name %></p>
+  <% end %>
+
+  <div class="mt-4">
+    <%= link_to 'Edit LP', edit_lp_path(@lp), class: 'btn btn-warning' %>
+    <%= link_to 'Back to LPs', lps_path, class: 'btn btn-secondary' %>
+    <%= link_to 'Delete LP', @lp, 
+      data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, 
+      class: 'btn btn-danger' %>
+  </div>
+</div>

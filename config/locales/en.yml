@@ -1,5 +1,21 @@
 en:
+  activerecord:
+    errors:
+      models:
+        artist:
+          attributes:
+            name:
+              blank: must be provided
+              taken: has already been taken
+        lp:
+          attributes:
+            name:
+              blank: must be provided
+              taken: has already been taken      
   notices:
     artist_created: Artist was successfully created.
     artist_updated: Artist was successfully updated.
     artist_destroyed: Artist was successfully destroyed.
+    lp_created: LP was successfully created.
+    lp_updated: LP was successfully updated.
+    lp_destroyed: LP was successfully destroyed.

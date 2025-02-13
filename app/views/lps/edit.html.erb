@@ -1,2 +1,5 @@
-<h1>Lps#edit</h1>
-<p>Find me in app/views/lps/edit.html.erb</p>
+<div class="container mt-4">
+  <h1 class="mb-4">Edit LP</h1>
+  <%= render 'form', lp: @lp %>
+  <%= link_to 'Back to LPs', lps_path, class: 'btn btn-secondary mt-3' %>
+</div>
