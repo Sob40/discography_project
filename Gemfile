@@ -64,9 +64,9 @@ end
 group :test do
   # System testing (UI)
   gem 'capybara'
+  gem 'capybara-screenshot'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 6.4' # For easy model validations ;)
-  gem 'webdrivers'
 end
 
 gem 'cssbundling-rails', '~> 1.4'
