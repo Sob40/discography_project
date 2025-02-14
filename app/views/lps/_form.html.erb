@@ -3,13 +3,17 @@
     <%= form.label :name, "LP Name *", class: "form-label" %>
     <%= form.text_field :name, class: "form-control", required: true %>
   </div>
+  
   <div class="mb-3">
     <%= form.label :description, "Description", class: "form-label" %>
     <%= form.text_area :description, rows: 3, class: "form-control" %>
   </div>
+  
   <div class="mb-3">
-    <%= form.label :artist_id, "Artist", class: "form-label" %>
-    <%= form.collection_select :artist_id, Artist.all, :id, :name, { prompt: "Select an artist" }, { class: "form-select" } %>
+    <%= form.label :artist_id, "Artist *", class: "form-label" %>
+    <%= form.collection_select :artist_id, Artist.all, :id, :name, 
+      { prompt: "Select an artist" }, 
+      { class: "form-select", required: true } %>
   </div>
 
   <hr>
@@ -17,52 +21,26 @@
   <div data-controller="nested-fields">
     <div data-nested-fields-target="container">
       <%= form.fields_for :songs do |song_form| %>
-        <div class="nested-field mb-3">
-          <div class="row align-items-center">
-            <div class="col">
-              <div class="input-group">
-                <span class="input-group-text">Song Name</span>
-                <%= song_form.text_field :name, class: "form-control", placeholder: "Enter song name" %>
-              </div>
-            </div>
-            <div class="col-auto">
-              <%= song_form.hidden_field :_destroy %>
-              <button data-action="click->nested-fields#remove" type="button" class="btn btn-danger btn-sm">
-                Remove
-              </button>
-            </div>
-          </div>
-        </div>
+        <%= render 'song_fields', f: song_form %>
       <% end %>
     </div>
 
     <template data-nested-fields-target="template">
       <div class="nested-field mb-3">
-        <div class="row align-items-center">
-          <div class="col">
-            <div class="input-group">
-              <span class="input-group-text">Song Name</span>
-              <input type="text" name="lp[songs_attributes][NEW_RECORD][name]" class="form-control" placeholder="Enter song name" />
-            </div>
-          </div>
-          <div class="col-auto">
-            <button data-action="click->nested-fields#remove" type="button" class="btn btn-danger btn-sm">
-              Remove
-            </button>
-          </div>
-        </div>
+        <%= form.fields_for :songs, Song.new, child_index: "NEW_RECORD" do |song_form| %>
+          <%= render 'song_fields', f: song_form %>
+        <% end %>
       </div>
     </template>
 
-    <div class="mb-3">
+    <div class="mb-3 text-end">
       <button data-action="click->nested-fields#add" type="button" class="btn btn-secondary">
         Add Song
       </button>
     </div>
   </div>
 
-  <div class="d-flex justify-content-end gap-2 mt-4">
-    <%= link_to 'Back', lps_path, class: "btn btn-secondary" %>
-    <%= form.submit (lp.persisted? ? "Update" : "Create"), class: "btn btn-primary" %>
+  <div>
+    <%= form.submit(lp.persisted? ? "Update" : "Create", class: "btn btn-primary") %>
   </div>
 <% end %>
