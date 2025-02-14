@@ -14,4 +14,16 @@ class Lp < ApplicationRecord
     joins(:artist).where('LOWER(artists.normalized_name) LIKE ?', "%#{normalized_artist_name}%")
   }
   scope :ordered, -> { order(:name) }
+  scope :with_report_data, lambda {
+    left_joins(:songs, :artist)
+      .left_joins(songs: :authors)
+      .group('lps.id', 'artists.name')
+      .select(<<-SQL.squish)
+        lps.id,
+        lps.name,
+        artists.name AS artist_name,
+        COUNT(DISTINCT songs.id) AS song_count,
+        GROUP_CONCAT(DISTINCT authors.name) AS authors_list
+      SQL
+  }
 end
