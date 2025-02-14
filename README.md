@@ -80,6 +80,3 @@ Web application built with Ruby on Rails to manage discographies, featuring CRUD
 - **Use of Stimulus and SlimSelect:**  
   Dynamic forms for adding and removing songs are implemented using Stimulus, and author selection is enhanced with SlimSelect, providing a modern and smooth user experience.
 
----
-
-This README provides a clear and professional overview of the project, covering both key functionalities and the tools used for quality and optimization. 🚀
