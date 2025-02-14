@@ -7,7 +7,7 @@ class Lp < ApplicationRecord
   accepts_nested_attributes_for :songs, allow_destroy: true, reject_if: :all_blank
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
-  validates :description, presence: true
+  validates :artist, presence: { message: I18n.t('errors.messages.artist_required') }
 
   scope :by_artist_name, lambda { |artist_name|
     normalized_artist_name = I18n.transliterate(artist_name).downcase
