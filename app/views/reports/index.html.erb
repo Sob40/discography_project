@@ -1,2 +1,35 @@
-<h1>Reports#index</h1>
-<p>Find me in app/views/reports/index.html.erb</p>
+<div class="container mt-4">
+  <h1 class="mb-4">📊 LP Report</h1>
+
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">🎼 LPs Summary</div>
+    <div class="card-body">
+      <table class="table table-striped table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th>LP Name</th>
+            <th>Artist</th>
+            <th>Number of Songs</th>
+            <th>Authors</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @lps.each do |lp| %>
+            <tr>
+              <td><%= lp.name %></td>
+              <td><%= lp.artist_name %></td>
+              <td><%= lp.song_count %> Songs</td>
+              <td>
+                <% if lp.authors_list.present? %>
+                  <%= lp.authors_list %>
+                <% else %>
+                  <span class="text-muted">No authors listed</span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
