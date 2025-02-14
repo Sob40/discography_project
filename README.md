@@ -1,46 +1,85 @@
 # Discography Project
 
-Aplicación web en Ruby on Rails para gestionar discografías, con funcionalidades de CRUD para artistas y LPs, reportes consolidados y seeds para datos iniciales.
+Web application built with Ruby on Rails to manage discographies, featuring CRUD functionality for artists and LPs, consolidated reports, and initial seed data.
 
-## Requerimientos
+## Requirements
 
-- **Ruby:** (versión recomendada, por ejemplo, 3.1.0)
+- **Ruby:** 3.1.0 (recommended)
 - **Rails:** 8.0.1
 - **Bundler**
 
-## Instalación
+## Installation
 
-1. **Clonar el repositorio:**
+1. **Clone the repository:**
    ```bash
    git clone https://github.com/Sob40/discography_project.git
    ```
 
-2. **Entrar en el directorio del proyecto:**
+2. **Navigate to the project directory:**
    ```bash
    cd discography_project
    ```
 
-3. **Instalar las dependencias:**
+3. **Install dependencies:**
    ```bash
    bundle install
    ```
 
-4. **Configurar la base de datos:**
+4. **Set up the database:**
    ```bash
    rails db:setup
    ```
-   Esto creará la base de datos, ejecutará las migraciones y poblará la BD con los datos iniciales (seeds).
+   This command creates the database, runs migrations, and populates it with initial seed data.
 
-5. **Iniciar el servidor:**
+5. **Precompile assets (if necessary):**
+   ```bash
+   rails assets:precompile
+   ```
+   If you encounter asset-related issues, clear the cache with:
+   ```bash
+   rails assets:clobber
+   ```
+
+6. **Start the server:**
    ```bash
    rails server
    ```
-   Luego, abre tu navegador en [http://localhost:3000](http://localhost:3000) para ver la aplicación en funcionamiento.
+   Then, open your browser and visit [http://localhost:3000](http://localhost:3000) to access the application.
 
-## Características
+## Features
 
-- **CRUD para Artistas:** Gestión de artistas con campos de nombre y descripción. En la vista de detalle se muestra el total de LPs asociados y un enlace para verlos.
-- **CRUD para LPs:** Gestión de LPs con campos de nombre y descripción, incluyendo la posibilidad de filtrar por el nombre del artista.
-- **Reporte Consolidado:** Página de reporte que muestra, para cada LP, el nombre del LP, el artista, el número de canciones y una lista de autores.
-- **Seeds:** Datos iniciales configurados para facilitar la puesta en marcha del proyecto.
-- **Frontend Mejorado:** Uso de JavaScript y CSS3 para mejorar la experiencia de usuario.
+- **CRUD for Artists:**  
+  Manage artists with name and description fields. The artist detail page displays the total number of LPs associated and includes a link to view them.
+
+- **CRUD for LPs:**  
+  Manage LPs with name and description fields, including a filter by artist name.
+
+- **Consolidated Report:**  
+  A report page displaying, for each LP, its name, artist, number of songs, and a comma-separated list of song authors.
+
+- **CRUD for Songs and Authors:**  
+  Users can add, update, and remove songs from an LP and assign one or more authors to each song using dynamic forms powered by Stimulus and SlimSelect.
+
+- **Seed Data:**  
+  Initial data is preconfigured using FactoryBot to facilitate project setup, including various Spanish artists, LPs, songs, and author associations.
+
+- **Enhanced Frontend:**  
+  JavaScript (Stimulus) and CSS3 are used to enhance user experience in dynamic forms and reports.
+
+- **Code Quality:**  
+  RuboCop has been applied to maintain best practices and code consistency. Run the following command to check code style:
+  ```bash
+  bundle exec rubocop
+  ```
+
+## Additional Notes
+
+- **Asset Pipeline:**  
+  The application utilizes asset precompilation. If you experience issues with assets, run `rails assets:clobber` followed by `rails assets:precompile`.
+
+- **Use of Stimulus and SlimSelect:**  
+  Dynamic forms for adding and removing songs are implemented using Stimulus, and author selection is enhanced with SlimSelect, providing a modern and smooth user experience.
+
+---
+
+This README provides a clear and professional overview of the project, covering both key functionalities and the tools used for quality and optimization. 🚀
