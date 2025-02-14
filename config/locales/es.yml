@@ -1,4 +1,7 @@
-en:
+es:
+  errors:
+      messages:
+        artist_required: "Se debe seleccionar un artista."
   activerecord:
     errors:
       models:
@@ -6,17 +9,21 @@ en:
           attributes:
             name:
               blank: debe ser proporcionado
-              taken: ya ha sido utilizado
+              taken: ya ha sido tomado
         lp:
           attributes:
             name:
               blank: debe ser proporcionado
-              taken: ya ha sido utilizado      
+              taken: ya ha sido tomado
+        author:
+          attributes:
+            name:
+              blank: debe ser proporcionado
+              taken: ya ha sido usado          
   notices:
-    artist_created: Artist was successfully created.
-    artist_updated: Artist was successfully updated.
-    artist_destroyed: Artist was successfully destroyed.
-    lp_created: LP was successfully created.
-    lp_updated: LP was successfully updated.
-    lp_destroyed: LP was successfully destroyed.
-    
+    artist_created: El artista se creó con éxito.
+    artist_updated: El artista se actualizó con éxito.
+    artist_destroyed: El artista se eliminó con éxito.
+    lp_created: El LP se creó con éxito.
+    lp_updated: El LP se actualizó con éxito.
+    lp_destroyed: El LP se eliminó con éxito.
