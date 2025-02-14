@@ -15,6 +15,7 @@ class LpsController < ApplicationController
 
   def new
     @lp = Lp.new
+    @lp.songs.build
   end
 
   def edit; end
@@ -48,6 +49,15 @@ class LpsController < ApplicationController
   end
 
   def lp_params
-    params.require(:lp).permit(:name, :description, :artist_id, songs_attributes: %I[id name _destroy])
+    permitted = params.require(:lp).permit(
+      :name, :description, :artist_id,
+      songs_attributes: [:id, :name, :_destroy, { author_ids: [] }]
+    )
+
+    permitted['songs_attributes']&.each_value do |song_attrs|
+      song_attrs['author_ids'] = song_attrs['author_ids'].compact_blank if song_attrs['author_ids'].is_a?(Array)
+    end
+
+    permitted
   end
 end

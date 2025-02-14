@@ -1,4 +1,7 @@
 en:
+  errors:
+      messages:
+        artist_required: An artist must be selected.
   activerecord:
     errors:
       models:
@@ -11,7 +14,12 @@ en:
           attributes:
             name:
               blank: must be provided
-              taken: has already been taken      
+              taken: has already been taken
+        author:
+          attributes:
+            name:
+              blank: must be provided
+              taken: has already been used          
   notices:
     artist_created: Artist was successfully created.
     artist_updated: Artist was successfully updated.

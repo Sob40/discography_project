@@ -3,15 +3,14 @@
   <head>
     <title><%= content_for?(:title) ? yield(:title) : "Discography Project" %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slim-select@2.10.0/dist/slimselect.min.css" data-turbo-track="reload">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <!-- Include Bootstrap styles and your assets -->
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
   <body>
-    <!-- Navbar (omnipresent menu) -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
         <%= link_to "Discography Project", root_path, class: "navbar-brand" %>
@@ -35,7 +34,6 @@
       </div>
     </nav>
 
-    <!-- Flash Messages -->
     <div class="container mt-3">
       <% if flash[:notice] %>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -50,7 +48,6 @@
       <% end %>
     </div>
 
-    <!-- Main container for page content -->
     <div class="container mt-4">
       <%= yield %>
     </div>

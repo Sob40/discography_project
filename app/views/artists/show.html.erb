@@ -1,34 +1,47 @@
 <div class="container mt-4">
-  <h1 class="mb-4"><%= @artist.name %></h1>
-  <p><%= @artist.description %></p>
-  <p><strong>Total LPs:</strong> <%= @artist.lp_count %></p>
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h1 class="mb-0"><%= @artist.name %></h1>
+    </div>
+    <div class="card-body">
+      <p class="text-muted"><%= @artist.description.presence || "No description available" %></p>
+      <p><strong>🎵 Total LPs:</strong> <%= @artist.lp_count %></p>
 
-  <% if @lps.present? %>
-    <h3>LPs</h3>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-      <% @lps.each do |lp| %>
-        <div class="col">
-          <div class="card h-100 shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title"><%= lp.name %></h5>
-              <p class="card-text"><%= truncate(lp.description, length: 100) %></p>
-            </div>
-            <div class="card-footer text-end">
-              <%= link_to 'View LP', lp_path(lp), class: 'btn btn-secondary btn-sm' %>
-            </div>
-          </div>
+      <% if @lps.present? %>
+        <h3 class="mt-4">📀 LPs</h3>
+        <table class="table table-hover mt-3">
+          <thead class="table-dark">
+            <tr>
+              <th>LP Name</th>
+              <th>Description</th>
+              <th class="text-end">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @lps.each do |lp| %>
+              <tr>
+                <td><strong><%= lp.name %></strong></td>
+                <td><%= truncate(lp.description, length: 100) %></td>
+                <td class="text-end">
+                  <%= link_to 'View LP', lp_path(lp), class: 'btn btn-secondary btn-sm' %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <div class="alert alert-info text-center mt-4" role="alert">
+          🎶 No LPs found for this artist.
         </div>
       <% end %>
     </div>
-  <% else %>
-    <div class="alert alert-info mt-4" role="alert">
-      No LPs found for this artist.
-    </div>
-  <% end %>
 
-  <div class="mt-4 d-flex justify-content-end">
-    <%= link_to 'Edit', edit_artist_path(@artist), class: 'btn btn-warning me-2' %>
-    <%= link_to 'Back', artists_path, class: 'btn btn-secondary me-2' %>
-    <%= link_to 'Delete', @artist, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+    <div class="card-footer d-flex justify-content-between">
+      <%= link_to '🔙 Back', artists_path, class: 'btn btn-secondary' %>
+      <div>
+        <%= link_to '✏️ Edit', edit_artist_path(@artist), class: 'btn btn-warning me-2' %>
+        <%= link_to '🗑️ Delete', @artist, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+      </div>
+    </div>
   </div>
 </div>

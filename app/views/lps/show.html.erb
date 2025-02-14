@@ -1,28 +1,52 @@
 <div class="container mt-4">
-  <h1 class="mb-4"><%= @lp.name %></h1>
-  <p><%= @lp.description %></p>
-  <% if @lp.artist.present? %>
-    <p><strong>Artist:</strong> <%= @lp.artist.name %></p>
-  <% end %>
-
-  <% if @lp.songs.any? %>
-    <h3>Songs</h3>
-    <ul class="list-group mb-4">
-      <% @lp.songs.each do |song| %>
-        <li class="list-group-item">
-          <%= song.name %>
-        </li>
-      <% end %>
-    </ul>
-  <% else %>
-    <div class="alert alert-info" role="alert">
-      No songs available for this LP.
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h1 class="mb-0"><%= @lp.name %></h1>
     </div>
-  <% end %>
+    <div class="card-body">
+      <p class="text-muted"><%= @lp.description.presence || "No description available" %></p>
 
-  <div class="mt-4 d-flex justify-content-end">
-    <%= link_to 'Edit', edit_lp_path(@lp), class: 'btn btn-warning me-2' %>
-    <%= link_to 'Back', lps_path, class: 'btn btn-secondary me-2' %>
-    <%= link_to 'Delete', @lp, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+      <% if @lp.artist.present? %>
+        <p><strong>🎤 Artist:</strong> <%= @lp.artist.name %></p>
+      <% end %>
+
+      <% if @lp.songs.any? %>
+        <h3 class="mt-4">🎵 Songs</h3>
+        <table class="table table-hover mt-3">
+          <thead class="table-dark">
+            <tr>
+              <th>Song Name</th>
+              <th>Authors</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @lp.songs.each do |song| %>
+              <tr>
+                <td><strong><%= song.name %></strong></td>
+                <td>
+                  <% if song.authors.any? %>
+                    <span class="badge bg-secondary"><%= song.authors.map(&:name).join(", ") %></span>
+                  <% else %>
+                    <span class="text-muted">No authors listed</span>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <div class="alert alert-info text-center mt-4" role="alert">
+          🎶 No songs available for this LP.
+        </div>
+      <% end %>
+    </div>
+
+    <div class="card-footer d-flex justify-content-between">
+      <%= link_to '🔙 Back', lps_path, class: 'btn btn-secondary' %>
+      <div>
+        <%= link_to '✏️ Edit', edit_lp_path(@lp), class: 'btn btn-warning me-2' %>
+        <%= link_to '🗑️ Delete', @lp, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+      </div>
+    </div>
   </div>
 </div>
